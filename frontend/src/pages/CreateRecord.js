@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import Loader from '../components/Loader';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BACKEND_URL } from '../utils/constants';
 
 function CreateRecord() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const [formData, setFormData] = useState({
+    const initialState = {
         name: "",
         email: "",
         phone: "",
         file: null,
-    });
+    }
+
+    const [formData, setFormData] = useState(initialState);
 
     // const navigate = useNavigate();
 
@@ -45,23 +50,28 @@ function CreateRecord() {
 
         axios({
             method: 'post',
+            withCredentials: true,
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
-            url: 'http://localhost:9000/api/v1/createZohoLead',
+            url: `${BACKEND_URL}/createZohoLead`,
             data: formData
         })
             .then((response) => {
                 console.log('response :', response.data);
-                alert("Form submitted successfully");
+                toast.success("Lead created Successfully");
+                setFormData(initialState);
                 // loader
                 setIsLoading(false);
             })
             .catch((error) => {
                 if (error?.response?.status === 409) {
                     console.log('you are already registered with us');
-                    alert('You are already registered with us');
+                    toast.info("Lead already exists");
+                    return;
                 }
+
+                toast.error("Something went wrong");
 
                 console.log('error', error);
             })

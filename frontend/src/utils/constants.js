@@ -1,0 +1,1 @@
+export const BACKEND_URL = "https://datamotive.onrender.com/api/v1"

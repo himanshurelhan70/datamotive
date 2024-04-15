@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BACKEND_URL } from '../utils/constants';
 
 
 function Signup() {
@@ -30,16 +33,17 @@ function Signup() {
 
         axios({
             method: 'post',
-            url: 'http://localhost:9000/api/v1/signup',
+            url: `${BACKEND_URL}/signup`,
             data: signupData
         })
             .then((response) => {
-                console.log('response :', response.data);
-                alert("Account created successfully");
+                console.log('response :', response);
+                toast.success(response?.data?.message);
                 navigate("/login");
             })
             .catch((error) => {
                 console.log('error', error);
+                toast.error(error?.response?.data?.message || "Something went wrong");
             })
     }
 

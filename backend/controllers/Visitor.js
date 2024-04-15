@@ -2,31 +2,15 @@ const axios = require("axios");
 const path = require("path");
 const FormData = require("form-data");
 const fs = require("fs");
+const { getAccessToken } = require('../accessToken');
 
-let access_token = "1000.68d80869390a47c8a582800b66be67c3.5a9298321c52ff85ffe2adbe3abfd03f";
-
-function getZohoAccessToken() {
-    let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: "https://accounts.zoho.com/oauth/v2/token?refresh_token=1000.83a3b549f4714729ad3d8290863d273a.bcdd3b018062df5458344a862f79d81a&client_id=1000.G73LKHN42126L4O4L6AGP0Y57B48UA&client_secret=b24d8b4b3a7fe61ca795fa59d29c28af2c3d578223&grant_type=refresh_token",
-    };
-
-    return axios
-        .request(config)
-        .then((response) => {
-            access_token = response.data.access_token; // Store the access token
-            console.log("access token generated", access_token);
-            return access_token;
-        })
-        .catch((error) => {
-            throw error;
-        });
-}
+let access_token = "";
 
 // search
 exports.searchRecordByMail = async (req, res, next) => {
-    await getZohoAccessToken();
+     // Generating access Token
+     access_token = await getAccessToken();
+
     const mail = req.body.email;
 
     const config = {
@@ -50,9 +34,11 @@ exports.searchRecordByMail = async (req, res, next) => {
             // newlead fields
             const newLead = [
                 {
-                    Lead_Source: "Custom app",
-                    Company: name,
-                    Last_Name: name,
+                    Lead_Source: "Others",
+                    Product: "DM Migrate",
+                    "Designation-": "test",
+                    "Last_Name": name,
+                    "First_Name": name,
                     Email: email,
                     Phone: phone,
                 },

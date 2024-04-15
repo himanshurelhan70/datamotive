@@ -1,6 +1,9 @@
 import React from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BACKEND_URL } from '../utils/constants';
 
 function Login({ loginData, setLoginData, setIsLoggedIn, setCurrentUser }) {
 
@@ -26,7 +29,7 @@ function Login({ loginData, setLoginData, setIsLoggedIn, setCurrentUser }) {
             },
             withCredentials: true,
             data: loginData,
-            url: "http://localhost:9000/api/v1/login"
+            url: `${BACKEND_URL}/login`
         };
 
 
@@ -35,7 +38,9 @@ function Login({ loginData, setLoginData, setIsLoggedIn, setCurrentUser }) {
                 console.log("login successful");
                 const data = response.data;
                 console.log(data);
-                alert("Login Successful");
+
+                toast.success("Successfully Logged In");
+                
 
 
 
@@ -56,6 +61,7 @@ function Login({ loginData, setLoginData, setIsLoggedIn, setCurrentUser }) {
             .catch((error) => {
                 console.log("error while login");
                 console.log(error);
+                toast.error(error?.response?.data?.message || "Something went wrong");
             });
     }
 
