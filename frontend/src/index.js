@@ -2,17 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import {BrowserRouter} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from "react-toastify";
+import { UserProvider } from "./context/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  
-    <BrowserRouter>
+
+  <BrowserRouter>
+    <UserProvider>
       <App />
       <ToastContainer />
-    </BrowserRouter>
-    
+    </UserProvider>
+
+  </BrowserRouter>
+
   // </React.StrictMode>
 );

@@ -1,5 +1,8 @@
 import React from "react";
 import axios from "axios";
+import { BACKEND_URL } from "../utils/constants";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function Lead({ record }) {
   // update lead status to approve in CRM
@@ -11,18 +14,18 @@ function Lead({ record }) {
       headers: {
         "Content-Type": "application/json",
       },
-      url: `http://localhost:9000/api/v1/updateRecord/approve/${leadId}`,
+      url: `${BACKEND_URL}/updateRecord/approve/${leadId}`,
     };
 
     axios(config)
       .then((response) => {
         const data = response.data;
         console.log(data);
-        alert("Record is updated");
+        toast.success("Record is updated Successfully");
       })
       .catch((error) => {
         console.log("error", error.message);
-        alert("error");
+        toast.error("Something went wrong");
       });
   };
 
@@ -36,7 +39,7 @@ function Lead({ record }) {
       headers: {
         "Content-Type": "application/json",
       },
-      url: `http://localhost:9000/api/v1/updateRecord/reject/${leadId}`,
+      url: `${BACKEND_URL}/updateRecord/reject/${leadId}`,
     };
 
     axios(config)

@@ -84,47 +84,50 @@ function CreateRecord() {
                 isLoading ? (<Loader />) : (<div className='w-[400px] flex flex-col justify-center mx-auto'>
                     {/* <h2 className='text-center text-xl my-4'>Fill this form to connect with us</h2> */}
                     <form onSubmit={submitHandler}>
-                        <label htmlFor="" className='mb-2'>Company Name</label>
+                        <label htmlFor="name" className='mb-2'>Company Name</label>
                         <input
                             type="text"
                             name="name"
-                            className='w-full block border-2 border-slate-400 rounded-md mb-2'
+                            id='name'
+                            className='w-full block border-2 border-slate-400 rounded-md mb-2 py-1 px-2'
                             onChange={inputHandler}
                             value={formData.name}
                             required={true}
                         />
 
-                        <label htmlFor="" >Email</label>
+                        <label htmlFor="email" >Email</label>
                         <input
                             type="email"
                             name="email"
-                            className=' w-full block border-2 border-slate-400 rounded-md mb-2'
+                            id='email'
+                            className=' w-full block border-2 border-slate-400 rounded-md mb-2 py-1 px-2'
                             onChange={inputHandler}
                             value={formData.email}
                             required={true}
                         />
 
-                        <label htmlFor="" >Phone</label>
+                        <label htmlFor="phone" >Phone</label>
                         <input
                             type="tel"
                             name="phone"
-                            className=' w-full block border-2 border-slate-400 rounded-md mb-2'
+                            id='phone'
+                            className=' w-full block border-2 border-slate-400 rounded-md mb-2 py-1 px-2'
                             onChange={inputHandler}
                             value={formData.phone}
                             required={true}
                         />
 
 
-                        <label htmlFor="" >File</label>
+                        {/* <label htmlFor="" >File</label>
                         <input
                             type="file"
                             name="file"
                             className=' w-full block border-2 border-slate-400 rounded-md mb-2'
                             onChange={fileHandler}
                             required={true}
-                        />
+                        /> */}
 
-                        <input type="submit" className='w-full bg-slate-500 text-white py-1 rounded-md' />
+                        <input type="submit" className='w-full bg-slate-500 text-white rounded-md p-2 hover:bg-slate-600 cursor-pointer' />
                     </form>
                 </div>)
 

@@ -1,5 +1,8 @@
 import React from 'react'
 import axios from 'axios'
+import { BACKEND_URL } from '../utils/constants';
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function User({ user }) {
 
@@ -10,7 +13,7 @@ function User({ user }) {
 
         const config = {
             method: "PUT",
-            url: `http://localhost:9000/api/v1/updateUserRole/${userId}`,
+            url: `${BACKEND_URL}/updateUserRole/${userId}`,
             withCredentials: true,
             data: {
                 role: selectedRole
@@ -21,10 +24,12 @@ function User({ user }) {
                 const data = response.data;
                 console.log("user role updated", data);
                 // fetchData();
+                toast.success("User Role Updated");
             })
             .catch((error) => {
                 console.log("error in updating user role");
                 console.log(error.message);
+                toast.error("Error while updating User's role");
             })
     }
 
@@ -42,7 +47,7 @@ function User({ user }) {
                     <option value="Admin" disabled={user.role === "Admin"}>Admin</option>
                 </select>
 
-                <button className='bg-blue-800 p-2 text-white' onClick={() => updateUserRole(user._id)}>
+                <button className='bg-blue-700 p-2 text-white hover:bg-blue-900' onClick={() => updateUserRole(user._id)}>
                     Update
                 </button>
             </td>
