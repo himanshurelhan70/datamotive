@@ -1,10 +1,9 @@
 import React from 'react'
 import Login from '../components/Login'
 
-function LoginPage({ loginData, setLoginData, setIsLoggedIn, setCurrentUser }) {
+function LoginPage() {
     return (
-        <Login loginData={loginData} setLoginData={setLoginData} 
-        setCurrentUser={setCurrentUser} setIsLoggedIn={setIsLoggedIn} />
+        <Login />
     )
 }
 
