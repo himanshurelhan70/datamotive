@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Lead from '../components/Lead'
 import Loader from '../components/Loader';
+import { BACKEND_URL } from '../utils/constants';
 
 function LeadsPage() {
     const [records, setRecords] = useState([]);
@@ -13,7 +14,7 @@ function LeadsPage() {
         // loader
         setIsLoading(true);
 
-        axios.get("http://localhost:9000/api/v1/getData", {
+        axios.get(`${BACKEND_URL}/getData`, {
             withCredentials: true
         })
             .then((response) => {

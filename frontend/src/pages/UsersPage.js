@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import User from "../components/User"
 import Loader from '../components/Loader';
+import { BACKEND_URL } from '../utils/constants';
 
 function UsersPage() {
     const [users, setUsers] = useState([]);
@@ -11,7 +12,7 @@ function UsersPage() {
 
     const fetchData = () => {
         setIsLoading(true);
-        axios.get("http://localhost:9000/api/v1/getAllUsers", {
+        axios.get(`${BACKEND_URL}/getAllUsers`, {
             withCredentials: true
         })
             .then((response) => {
